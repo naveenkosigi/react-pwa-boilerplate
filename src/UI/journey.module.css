@@ -1,0 +1,17 @@
+.journey-section{
+    width: 80%;
+    margin: auto;
+    margin-top: 72px;
+    box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%);
+    background: hsl(0 0% 100%);
+    padding: 20px;
+    border-radius: 20px;  
+}
+
+.form-container{
+    width: 60%;
+}
+
+.stepper-container{
+
+}
