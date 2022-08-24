@@ -1,17 +1,20 @@
 import React from "react";
 export const useJourney = (props) => {
 
-    const {preSave ,setActiveStep,setCompleted,activeStep} = props;
+    const {setActiveStep,setCompleted,activeStep} = props;
     
-    const onNext = (event) => {
-        event.preventDefault();
-        if(preSave) preSave(event);
+    const onChangeStep = (step,isCompleted = true) => {
 
-        //handle dispatch after transform
         console.log(props);
-        setActiveStep((step) => step + 1);
-        setCompleted((state) => ({...state,[activeStep] : true}));
+        setActiveStep(step);
+        if(isCompleted){
+            setCompleted((state) => ({...state,[activeStep] : true}));
+        }
+    }
+
+    const onNext = (event) => {
+
     }
     
-    return [onNext];
+    return [onChangeStep];
 }

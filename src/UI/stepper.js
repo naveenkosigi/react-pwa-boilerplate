@@ -89,7 +89,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
 export default function HorizontalNonLinearStepper(props) {
 
-    const { activeStep ,completed} = props;   
+    const { activeStep,completed,onChangeStep} = props;   
 
 
     const totalSteps = () => {
@@ -121,11 +121,28 @@ export default function HorizontalNonLinearStepper(props) {
       //setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
   
-    const handleStep = (step) => () => {
-      if(completed[activeStep]){
-          //setActiveStep(step);
-         //contentCallBack(step);    
+    const handleStep = (clickedStep) => () => {
+      if(activeStep === clickedStep) return;
+
+      if(clickedStep > activeStep && !!completed[clickedStep] === false){
+        return;
       }
+        
+      if (!!completed[activeStep] === false) {
+        //he has not completed the form show prompt
+        if (
+          window.confirm(
+            "You have not completed this form ! Navigating away will Reset it. Are you sure?"
+          ) === true
+        ) {
+            onChangeStep(clickedStep,false);
+        }
+      }
+      else if(completed[activeStep] === true){
+        onChangeStep(clickedStep);
+        return;
+      }  
+      
     };
   
     const handleComplete = () => {

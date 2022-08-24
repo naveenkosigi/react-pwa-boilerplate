@@ -8,9 +8,16 @@ export const Journey = React.memo((props) => {
 
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState({});
-    const {nextStepperContent} = props; 
+    const {nextStepperContent,preSave} = props; 
 
-    const [onNext] = useJourney({...props,setActiveStep,setCompleted,activeStep});
+    const [onChangeStep] = useJourney({...props,setActiveStep,setCompleted,activeStep});
+
+    function onFormSubmit(event) {
+        event.preventDefault();
+        if(preSave) preSave(event);
+
+        onChangeStep(activeStep + 1);
+    }
 
     
     return (
@@ -18,7 +25,7 @@ export const Journey = React.memo((props) => {
         className={`${className["journey-section"]} d-flex justify-content-between`}
       >
         <div className={`${className["form-container"]}`}>
-          <form onSubmit={onNext}>
+          <form onSubmit={onFormSubmit}>
             {nextStepperContent(activeStep)}
             <button type="submit" class="btn btn-primary">
               Submit
@@ -33,6 +40,7 @@ export const Journey = React.memo((props) => {
           <HorizontalNonLinearStepper
             activeStep={activeStep}
             completed={completed}
+            onChangeStep = {onChangeStep}
           />
         </div>
       </section>
