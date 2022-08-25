@@ -1,7 +1,20 @@
 import { Journey } from "../UI/journey";
 
 export default function DemoJourney() {
-  return <Journey nextStepperContent={nextStepperContent} preSave={preSave} />;
+
+  const journeyConfig = {
+    name : 'Demo Journey',
+    stepperTitles : [
+      "Business Entity Details",
+      "Personal Details",
+      "Account Details",
+      "Additional Info"
+    ],
+    nextStepperContent,
+    preSave
+  };
+
+  return <Journey config={journeyConfig} />;
 }
 
 function nextStepperContent(stepCount) {

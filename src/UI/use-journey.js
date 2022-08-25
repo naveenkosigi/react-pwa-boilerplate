@@ -1,20 +1,28 @@
 import React from "react";
 export const useJourney = (props) => {
 
-    const {setActiveStep,setCompleted,activeStep} = props;
+    const {setActiveStep,setCompleted,activeStep,stepperSize} = props;
     
-    const onChangeStep = (step,isCompleted = true) => {
+    const onChangeStep = (step,isCompleted = true,event) => {
 
-        console.log(props);
-        setActiveStep(step);
-        if(isCompleted){
-            setCompleted((state) => ({...state,[activeStep] : true}));
+        if (step <= stepperSize) {
+          setActiveStep(step);
+          if (isCompleted) {
+            console.log(event);
+            //update to redux sync and then mark as completed using event
+
+            setCompleted((state) => ({ ...state, [activeStep]: true }));
+          }
         }
+        else{
+            setCompleted((state) => ({ ...state, [activeStep]: true }));
+
+            console.log("Completed");
+
+            //do some operation
+        } 
+        
     }
 
-    const onNext = (event) => {
-
-    }
-    
     return [onChangeStep];
 }

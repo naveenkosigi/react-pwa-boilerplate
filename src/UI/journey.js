@@ -8,15 +8,20 @@ export const Journey = React.memo((props) => {
 
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState({});
-    const {nextStepperContent,preSave} = props; 
+    const {nextStepperContent,preSave,stepperTitles} = props.config; 
 
-    const [onChangeStep] = useJourney({...props,setActiveStep,setCompleted,activeStep});
+    const [onChangeStep] = useJourney({
+      ...props,
+      setActiveStep,
+      setCompleted,
+      activeStep,
+      stepperSize: stepperTitles.length - 1
+    });
 
     function onFormSubmit(event) {
         event.preventDefault();
-        if(preSave) preSave(event);
 
-        onChangeStep(activeStep + 1);
+        onChangeStep(activeStep + 1,true,event);
     }
 
     
@@ -41,6 +46,7 @@ export const Journey = React.memo((props) => {
             activeStep={activeStep}
             completed={completed}
             onChangeStep = {onChangeStep}
+            steps={stepperTitles}
           />
         </div>
       </section>
