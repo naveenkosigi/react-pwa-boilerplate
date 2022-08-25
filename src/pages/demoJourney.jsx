@@ -1,7 +1,7 @@
 import { Journey } from "../UI/journey";
 
 export default function DemoJourney() {
-  return <Journey nextStepperContent={nextStepperContent} preSave={preSave}/>;
+  return <Journey nextStepperContent={nextStepperContent} preSave={preSave} />;
 }
 
 function nextStepperContent(stepCount) {
@@ -39,10 +39,111 @@ function nextStepperContent(stepCount) {
         </div>
       </div>
     );
+  } else if (stepCount == 1) {
+    return (
+      <div>
+        <h2>Contact Us</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="first">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder=""
+                id="first"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="last">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder=""
+                id="last"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder=""
+                id="company"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="phone"
+                placeholder="phone"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="email"
+                required
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  else if(stepCount === 2){
+    return(
+      <div>
+        <label for="contact-preference">When is the best time of day to reach you?</label>
+    <div class="radio">
+      <label>
+        <input type="radio" name="contact-preference" id="contact-preference" value="am" required/>Morning
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="contact-preference" id="contact-preference" value="pm" required/>Evening
+      </label>
+    </div>
+
+    <label for="newsletter">Would you like to recieve our email newsletter?</label>
+    <div class="checkbox">
+
+      <label>
+        <input type="checkbox" value="Sure!" id="newsletter"/> Sure!
+      </label>
+    </div>
+
+      </div>
+    )
   }
   return <div>{stepCount}</div>;
 }
 
-function preSave(step){
+function preSave(step) {
   console.log("called child method");
 }
