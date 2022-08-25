@@ -159,6 +159,6 @@ function nextStepperContent(stepCount) {
   return <div>{stepCount}</div>;
 }
 
-function preSave(step) {
-  console.log("called child method");
+function preSave(data) {
+  console.log("called child method",data);
 }

@@ -15,7 +15,8 @@ export const Journey = React.memo((props) => {
       setActiveStep,
       setCompleted,
       activeStep,
-      stepperSize: stepperTitles.length - 1
+      stepperSize: stepperTitles.length - 1,
+      onCompletion:preSave
     });
 
     function onFormSubmit(event) {
