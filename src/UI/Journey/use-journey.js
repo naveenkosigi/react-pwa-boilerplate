@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { JOURNEY_STATE_KEY } from "../store";
-import { saveStepData } from "../store/slices/journeySlice";
+import { JOURNEY_STATE_KEY } from "../../store/index";
+import { saveStepData } from "../../store/slices/journeySlice";
 import {cloneDeep} from "lodash"
 
 export const useJourney = (props) => {

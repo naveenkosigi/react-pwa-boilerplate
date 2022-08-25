@@ -1,4 +1,4 @@
-import { Journey } from "../UI/journey";
+import { Journey } from "../UI/Journey/journey";
 
 export default function DemoJourney() {
 

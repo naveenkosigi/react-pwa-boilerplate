@@ -1,5 +1,5 @@
 import className from './journey.module.css';
-import HorizontalNonLinearStepper from './stepper';
+import HorizontalNonLinearStepper from '../Stepper/stepper';
 import React, { useState } from 'react';
 import { useJourney } from './use-journey';
 
