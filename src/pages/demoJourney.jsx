@@ -25,6 +25,7 @@ function nextStepperContent(stepCount) {
           <label for="exampleFormControlInput1">Email address</label>
           <input
             type="text"
+            name="email"
             class="form-control"
             id="exampleFormControlInput1"
             placeholder="name@example.com"
@@ -33,7 +34,7 @@ function nextStepperContent(stepCount) {
         </div>
         <div class="form-group">
           <label for="exampleFormControlSelect1">Example select</label>
-          <select class="form-control" id="exampleFormControlSelect1" required>
+          <select class="form-control" id="exampleFormControlSelect1" name="multiselect" required>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -47,6 +48,7 @@ function nextStepperContent(stepCount) {
             class="form-control"
             id="exampleFormControlTextarea1"
             rows="3"
+            name="description"
             required
           ></textarea>
         </div>
