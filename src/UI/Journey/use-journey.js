@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { JOURNEY_STATE_KEY } from "../../store/index";
 import { saveStepData } from "../../store/slices/journeySlice";
@@ -10,20 +10,19 @@ export const useJourney = (props) => {
 
     const dispatch = useDispatch();
     const journeyState = useSelector((state) => state[JOURNEY_STATE_KEY]);
+
+    const journeyDeepClone = useMemo(() => {
+        return cloneDeep(journeyState);
+    },[journeyState]);
+
     
-    const onChangeStep = (step,isCompleted = true,event) => {
+    const onChangeStep = (step,isCompleted = true,data) => {
 
         if (step <= stepperSize) {
           setActiveStep(step);
           if (isCompleted) {
-            console.log(event);
 
-            const formData = new FormData(event.target);
-            let data = {};
-            for (var [key, value] of formData.entries()) { 
-                data[key] = value;
-            }
-
+            
             //update to redux sync
             dispatch(saveStepData({ step:activeStep, data }));
             
@@ -46,5 +45,5 @@ export const useJourney = (props) => {
         
     }
 
-    return [onChangeStep];
+    return [onChangeStep,journeyDeepClone];
 }

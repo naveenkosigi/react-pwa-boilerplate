@@ -26,7 +26,7 @@ export default function HorizontalNonLinearStepper(props) {
         }
       }
       else if(completed[activeStep] === true){
-        onChangeStep(clickedStep);
+        onChangeStep(clickedStep,false);
         return;
       }  
       

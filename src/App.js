@@ -1,8 +1,4 @@
-import logo from './logo.svg';
-import { Journey } from './UI/Journey/journey';
-import HorizontalNonLinearStepper from './UI/Stepper/stepper';
 import  DemoJourney  from './pages/demoJourney';
-import NPTextField from './UI/Form/Input-Fields/NPTextField';
 import NPFormBuilder from './UI/Form/NPFormBuilder';
 import * as yup from "yup";
 
@@ -18,41 +14,46 @@ const validationSchema = yup.object({
 });
 
 const config={
-  initialValues: {
+  defaultValues: {
     email: "foobar@example.com",
     number: "12",
     date:''
   },
-  validationSchema: validationSchema
+  validationSchema: validationSchema,
+  fieldTypes:[
+    {
+      type:'email',
+      id:'email',
+      name:'email',
+      label:'email'
+    },
+    {
+      type:'number',
+      id:'number',
+      name:'number',
+      label:'Number'
+    },
+    {
+      type:'date',
+      id:'date',
+      name:'date',
+      label:'Date of Birth'
+    },
+    { 
+      type:'textarea',
+      id:'description',
+      name:'description',
+      label:'description',
+      multiline:true,
+      rows:2
+    }
+  ]
 };
-
-const fields = [
-  {
-    type:'email',
-    id:'email',
-    name:'email',
-    label:'email'
-  },
-  {
-    type:'number',
-    id:'number',
-    name:'number',
-    label:'Number'
-  },
-  {
-    type:'date',
-    id:'date',
-    name:'date',
-    helperText:undefined,
-    label:'Date of Birth'
-  }
-]
 
 function App() {
   return (
     <div>
           <DemoJourney />
-          <NPFormBuilder config={config} fields={fields}/>
     </div>
   );
 }

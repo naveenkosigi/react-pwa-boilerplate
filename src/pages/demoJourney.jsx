@@ -1,4 +1,6 @@
 import { Journey } from "../UI/Journey/journey";
+import * as yup from "yup";
+
 
 export default function DemoJourney() {
 
@@ -19,6 +21,58 @@ export default function DemoJourney() {
 
 function nextStepperContent(stepCount) {
   if (stepCount === 0) {
+
+    const validationSchema = yup.object({
+      email: yup
+        .string("Enter your email")
+        .email("Enter a valid email")
+        .required("Email is required"),
+      number: yup
+        .number("Enter number")
+        .min(8, "Number should be of minimum 8 characters length")
+        .required("Number is required")
+    });
+    
+    const config={
+      mode:'edit',
+      defaultValues: {
+        email: "foobar@example.com",
+        number: "12",
+        date:''
+      },
+      validationSchema: validationSchema,
+      fieldTypes:[
+        {
+          type:'email',
+          id:'email',
+          name:'email',
+          label:'email'
+        },
+        {
+          type:'number',
+          id:'number',
+          name:'number',
+          label:'Number'
+        },
+        {
+          type:'date',
+          id:'date',
+          name:'date',
+          label:'Date of Birth'
+        },
+        { 
+          type:'textarea',
+          id:'description',
+          name:'description',
+          label:'description',
+          multiline:true,
+          rows:2
+        }
+      ]
+    };
+
+    return config;
+
     return (
       <div>
         <div class="form-group">
@@ -54,109 +108,14 @@ function nextStepperContent(stepCount) {
         </div>
       </div>
     );
-  } else if (stepCount == 1) {
-    return (
-      <div>
-        <h2>Contact Us</h2>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="first">First Name</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder=""
-                id="first"
-                required
-              />
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="last">Last Name</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder=""
-                id="last"
-                required
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="company">Company</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder=""
-                id="company"
-                required
-              />
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="phone">Phone Number</label>
-              <input
-                type="tel"
-                class="form-control"
-                id="phone"
-                placeholder="phone"
-                required
-              />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="email">Email address</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                placeholder="email"
-                required
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  else if(stepCount === 2){
-    return(
-      <div>
-        <label for="contact-preference">When is the best time of day to reach you?</label>
-    <div class="radio">
-      <label>
-        <input type="radio" name="contact-preference" id="contact-preference" value="am" required/>Morning
-      </label>
-    </div>
-    <div class="radio">
-      <label>
-        <input type="radio" name="contact-preference" id="contact-preference" value="pm" required/>Evening
-      </label>
-    </div>
-
-    <label for="newsletter">Would you like to recieve our email newsletter?</label>
-    <div class="checkbox">
-
-      <label>
-        <input type="checkbox" value="Sure!" id="newsletter"/> Sure!
-      </label>
-    </div>
-
-      </div>
+  } 
+  return {
+    mode:'view',
+    defaultValues:{},
+    content:(
+      <div>{stepCount}</div>
     )
-  }
-  return <div>{stepCount}</div>;
+  };
 }
 
 function preSave(data) {

@@ -2,6 +2,7 @@ import className from './journey.module.css';
 import HorizontalNonLinearStepper from '../Stepper/stepper';
 import React, { useState } from 'react';
 import { useJourney } from './use-journey';
+import NPFormBuilder from '../Form/NPFormBuilder';
 
 export const Journey = React.memo((props) => {
 
@@ -10,7 +11,7 @@ export const Journey = React.memo((props) => {
     const [completed, setCompleted] = React.useState({});
     const {nextStepperContent,preSave,stepperTitles} = props.config; 
 
-    const [onChangeStep] = useJourney({
+    const [onChangeStep,journeyDeepClone] = useJourney({
       ...props,
       setActiveStep,
       setCompleted,
@@ -19,10 +20,10 @@ export const Journey = React.memo((props) => {
       onCompletion:preSave
     });
 
-    function onFormSubmit(event) {
-        event.preventDefault();
+    console.log(journeyDeepClone);
 
-        onChangeStep(activeStep + 1,true,event);
+    function onFormSubmit(data={}) {
+        onChangeStep(activeStep + 1,true,data);
     }
 
     
@@ -31,16 +32,7 @@ export const Journey = React.memo((props) => {
         className={`${className["journey-section"]} d-flex justify-content-between`}
       >
         <div className={`${className["form-container"]}`}>
-          <form onSubmit={onFormSubmit}>
-            {nextStepperContent(activeStep)}
-            <button type="submit" class="btn btn-primary">
-              Submit
-            </button>
-            &nbsp;
-            <button type="button" class="btn btn-danger">
-              Reset
-            </button>
-          </form>
+            <NPFormBuilder config={nextStepperContent(activeStep)} onSubmit={onFormSubmit} overRideData={journeyDeepClone[activeStep]}/>
         </div>
         <div className={`${className["stepper-container"]}`}>
           <HorizontalNonLinearStepper
